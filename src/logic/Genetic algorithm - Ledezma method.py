@@ -611,10 +611,6 @@ def write_starting_data(file):
     file.write("Breed percentage: "+str(breed_percentage)+"\n")
     file.write("Crossover point: "+str(crossover_point)+"\n\n")
 
-    file.write("Mutation probability: "+str(mutation_probability)+"\n")
-    file.write("Mutation rate: "+str(mutation_rate)+"\n")
-    file.write("Mutation range: "+str(mutation_range)+"\n\n")
-
     file.write("Maximum generation: "+str(maximum_generation)+"\n\n")
 
     file.write("Number of variables: "+str(variables_number)+"\n")
