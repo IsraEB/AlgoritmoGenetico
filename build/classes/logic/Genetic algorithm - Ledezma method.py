@@ -32,6 +32,8 @@ mutation_probability = 10  # If it is big, dom't function properly
 mutation_range = "All"  # All, Left or Right
 maximum_generation = int(sys.argv[2])
 
+extremeTournament = sys.argv[4] == 'True'
+
 print_trace_bool = False
 write_trace_bool = True
 random_crossover_point_bool = False
@@ -453,22 +455,20 @@ def breed_two_parents(parent_1, parent_2, childs, breed_reg):
                     "Child: " + individual_to_string(individual)+": No, la variable sale de los rangos")
             continue
 
-        # if purpose == "Maximize":
-        #     if fitness_function(get_int_individual(individual)) < fitness_function(get_int_individual(separate_variables(parent_1))) or fitness_function(get_int_individual(individual)) < fitness_function(get_int_individual(separate_variables(parent_2))):
-        #         if print_trace_bool or write_trace_bool:
-        #             breed_reg.append(
-        #                 "Child: " + individual_to_string(individual)+": No, el hijo no maximiza a los padres")
-        #             continue
-        # elif purpose == "Minimize":
-        #     # print(individual)
-        #     # print(get_int_individual(individual))
-        #     # print(fitness_function(get_int_individual(individual)))
-        #     if fitness_function(get_int_individual(individual)) > fitness_function(get_int_individual(separate_variables(parent_1))) or fitness_function(get_int_individual(individual)) > fitness_function(get_int_individual(separate_variables(parent_2))):
-        #         if print_trace_bool or write_trace_bool:
-        #             breed_reg.append(
-        #                 "Child: " + individual_to_string(individual)+": No, el hijo no minimiza a los padres")
-        #             continue
-        #     pass
+        if extremeTournament:
+            if purpose == "Maximize":
+                if fitness_function(get_int_individual(individual)) < fitness_function(get_int_individual(separate_variables(parent_1))) or fitness_function(get_int_individual(individual)) < fitness_function(get_int_individual(separate_variables(parent_2))):
+                    if print_trace_bool or write_trace_bool:
+                        breed_reg.append(
+                            "Child: " + individual_to_string(individual)+": No, el hijo no maximiza a los padres")
+                        continue
+            elif purpose == "Minimize":
+                if fitness_function(get_int_individual(individual)) > fitness_function(get_int_individual(separate_variables(parent_1))) or fitness_function(get_int_individual(individual)) > fitness_function(get_int_individual(separate_variables(parent_2))):
+                    if print_trace_bool or write_trace_bool:
+                        breed_reg.append(
+                            "Child: " + individual_to_string(individual)+": No, el hijo no minimiza a los padres")
+                        continue
+                pass
 
         if (len(childs) != population_size):
             if print_trace_bool or write_trace_bool:
